@@ -43,7 +43,7 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = GroupSerializer
 
 
-class FollowViewSet(generics.ListCreateAPIView, viewsets.GenericViewSet):
+class FollowViewSet(viewsets.ViewSetMixin, generics.ListCreateAPIView):
     serializer_class = FollowSerializer
     filter_backends = (SearchFilter,)
     search_fields = ('user__username', 'following__username')
