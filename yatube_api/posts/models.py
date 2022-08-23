@@ -38,7 +38,7 @@ class Post(models.Model):
     class Meta:
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
-        ordering = ('-pub_date',)
+        ordering = ('pub_date',)
 
     def __str__(self):
         return self.text[:15]
@@ -59,12 +59,12 @@ class Follow(models.Model):
     """Подписка на авторов."""
     user = models.ForeignKey(User, on_delete=models.CASCADE,
                              related_name='follower', verbose_name='Подписчик')
-    author = models.ForeignKey(User, on_delete=models.CASCADE,
+    following = models.ForeignKey(User, on_delete=models.CASCADE,
                                related_name='following', verbose_name='Автор')
 
     class Meta:
         constraints = (
             models.UniqueConstraint(
-                fields=['user', 'author'], name='unique_user_author'
+                fields=['user', 'following'], name='unique_user_following'
             ),
         )
