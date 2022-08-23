@@ -50,8 +50,8 @@ class FollowView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        user = self.request.user
-        return user.follower.all()
+        current_user = self.request.user
+        return current_user.follower.all()
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
